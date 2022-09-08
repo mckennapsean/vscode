@@ -458,6 +458,12 @@ configurationRegistry.registerConfiguration({
 			'description': nls.localize('compressSingleChildFolders', "Controls whether the explorer should render folders in a compact form. In such a form, single child folders will be compressed in a combined tree element. Useful for Java package structures, for example."),
 			'default': true
 		},
+		'explorer.hideEmptyFolders': {
+			'type': 'boolean',
+			'description': nls.localize('hideEmptyFolders', "Controls whether the explorer should hide folders which have nothing in them (except other folders) based on the exclusions. This provides benefit when filtering to a specific type of file, such as viewing only Markdown files in large monorepo."),
+			// TODO: make this false by default eventually
+			'default': true
+		},
 		'explorer.copyRelativePathSeparator': {
 			'type': 'string',
 			'enum': [

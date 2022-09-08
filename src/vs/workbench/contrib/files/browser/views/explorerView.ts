@@ -401,12 +401,14 @@ export class ExplorerView extends ViewPane implements IExplorerView {
 		this._register(createFileIconThemableTreeContainerScope(container, this.themeService));
 
 		const isCompressionEnabled = () => this.configurationService.getValue<boolean>('explorer.compactFolders');
+		const isFolderHidingEnabled = () => this.configurationService.getValue<boolean>('explorer.hideEmptyFolders');
 
 		const getFileNestingSettings = (item?: ExplorerItem) => this.configurationService.getValue<IFilesConfiguration>({ resource: item?.root.resource }).explorer.fileNesting;
 
 		this.tree = <WorkbenchCompressibleAsyncDataTree<ExplorerItem | ExplorerItem[], ExplorerItem, FuzzyScore>>this.instantiationService.createInstance(WorkbenchCompressibleAsyncDataTree, 'FileExplorer', container, new ExplorerDelegate(), new ExplorerCompressionDelegate(), [this.renderer],
 			this.instantiationService.createInstance(ExplorerDataSource, this.filter), {
 			compressionEnabled: isCompressionEnabled(),
+			folderHidingEnabled: isFolderHidingEnabled(),
 			accessibilityProvider: this.renderer,
 			identityProvider,
 			keyboardNavigationLabelProvider: {
@@ -457,6 +459,7 @@ export class ExplorerView extends ViewPane implements IExplorerView {
 		this._register(this.tree);
 
 		// Bind configuration
+		// TODO: bind config in here too!
 		const onDidChangeCompressionConfiguration = Event.filter(this.configurationService.onDidChangeConfiguration, e => e.affectsConfiguration('explorer.compactFolders'));
 		this._register(onDidChangeCompressionConfiguration(_ => this.tree.updateOptions({ compressionEnabled: isCompressionEnabled() })));
 

@@ -1141,11 +1141,14 @@ function asCompressibleObjectTreeOptions<TInput, T, TFilterData>(options?: IComp
 
 export interface ICompressibleAsyncDataTreeOptions<T, TFilterData = void> extends IAsyncDataTreeOptions<T, TFilterData> {
 	readonly compressionEnabled?: boolean;
+	// TODO: needed or naw? same below.
+	readonly hideEmptyFoldersEnabled?: boolean;
 	readonly keyboardNavigationLabelProvider?: ICompressibleKeyboardNavigationLabelProvider<T>;
 }
 
 export interface ICompressibleAsyncDataTreeOptionsUpdate extends IAsyncDataTreeOptionsUpdate {
 	readonly compressionEnabled?: boolean;
+	readonly hideEmptyFoldersEnabled?: boolean;
 }
 
 export class CompressibleAsyncDataTree<TInput, T, TFilterData = void> extends AsyncDataTree<TInput, T, TFilterData> {

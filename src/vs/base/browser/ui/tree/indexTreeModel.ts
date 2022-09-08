@@ -544,7 +544,9 @@ export class IndexTreeModel<T extends Exclude<any, undefined>, TFilterData = voi
 		node.visibleChildrenCount = visibleChildrenCount;
 		node.visible = visibility === TreeVisibility.Recurse ? visibleChildrenCount > 0 : (visibility === TreeVisibility.Visible);
 
-		if (!node.visible) {
+		// TODO: wire up our setting here
+		const childRenderedStuff = node.children.some(child => !!child.renderNodeCount);
+		if (!node.visible || !node.visibleChildrenCount || !childRenderedStuff) {
 			node.renderNodeCount = 0;
 
 			if (revealed) {
@@ -639,7 +641,9 @@ export class IndexTreeModel<T extends Exclude<any, undefined>, TFilterData = voi
 			node.visibility = visibility!;
 		}
 
-		if (!node.visible) {
+		// TODO: wire up our setting here
+		const childRenderedStuff = node.children.some(child => !!child.renderNodeCount);
+		if (!node.visible || !node.visibleChildrenCount || !childRenderedStuff) {
 			node.renderNodeCount = 0;
 
 			if (revealed) {

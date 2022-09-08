@@ -332,6 +332,7 @@ suite('CompressibleObjectTree', function () {
 		assert.deepStrictEqual(getRowsTextContent(container), ['1/11', '111', '112', '113/1131', '1132', '1133']);
 	});
 
+	// TODO: write a test!
 	test('enableCompression', () => {
 		const container = document.createElement('div');
 		container.style.width = '200px';

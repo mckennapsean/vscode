@@ -107,6 +107,8 @@ function splice<T>(treeElement: ICompressedTreeElement<T>, element: T, children:
 
 interface ICompressedObjectTreeModelOptions<T, TFilterData> extends IObjectTreeModelOptions<ICompressedTreeNode<T>, TFilterData> {
 	readonly compressionEnabled?: boolean;
+	// TODO: needed or naw?
+	readonly hideEmptyFoldersEnabled?: boolean;
 }
 
 const wrapIdentityProvider = <T>(base: IIdentityProvider<T>): IIdentityProvider<ICompressedTreeNode<T>> => ({
@@ -127,6 +129,7 @@ export class CompressedObjectTreeModel<T extends NonNullable<any>, TFilterData e
 	private model: ObjectTreeModel<ICompressedTreeNode<T>, TFilterData>;
 	private nodes = new Map<T | null, ICompressedTreeNode<T>>();
 	private enabled: boolean;
+	private hideEmptyFoldersEnabled: boolean;
 	private readonly identityProvider?: IIdentityProvider<ICompressedTreeNode<T>>;
 
 	get size(): number { return this.nodes.size; }
@@ -138,6 +141,7 @@ export class CompressedObjectTreeModel<T extends NonNullable<any>, TFilterData e
 	) {
 		this.model = new ObjectTreeModel(user, list, options);
 		this.enabled = typeof options.compressionEnabled === 'undefined' ? true : options.compressionEnabled;
+		this.hideEmptyFoldersEnabled = !!options.hideEmptyFoldersEnabled;
 		this.identityProvider = options.identityProvider;
 	}
 

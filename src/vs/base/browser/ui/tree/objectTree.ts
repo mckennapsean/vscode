@@ -164,6 +164,8 @@ export interface ICompressibleKeyboardNavigationLabelProvider<T> extends IKeyboa
 
 export interface ICompressibleObjectTreeOptions<T, TFilterData = void> extends IObjectTreeOptions<T, TFilterData> {
 	readonly compressionEnabled?: boolean;
+	// TODO: needed or naw?
+	readonly hideEmptyFolders?: boolean;
 	readonly elementMapper?: ElementMapper<T>;
 	readonly keyboardNavigationLabelProvider?: ICompressibleKeyboardNavigationLabelProvider<T>;
 }
